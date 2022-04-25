@@ -5,18 +5,22 @@ SA mechanism is used in Qlik Sense (both Windows and SaaS) for dynamic data redu
 
 In the OEM space, Section Access can be used for two reasons:
 
-1. 
+1. To separate/segregate customer data within one monolithic app containing __ALL__ customer data.
+2. When having one app per customer, adding row-level security to define who gets to see what.
 
 
 ## Section Access in Client-managed
-If your apps in Client-managed use Section Access for customer data segregation or to control access on data by different groups of users, for data reduction then you have table that looks like this:
+If your apps in Client-managed use SA today then probably have a security table loaded at the beginning of your load script that looks like this:
 
 ![section access table in windows]()
 
 
 ## Section Access in SaaS
-SaaS uses 
+SaaS also supports SA in the same form as in Client-managed i.e. a security table in the load script with a number of data restrictions, but it has some particularities though. For example, ...
+To learn more details about how to work with SA in SaaS please visit our [Online Help](https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/Scripting/Security/manage-security-with-section-access.htm) 
 
-## Recommendation
+## Implementation in SaaS
 
-##
+
+
+## Tips and Recommendations

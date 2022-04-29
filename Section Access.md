@@ -122,7 +122,12 @@ Most likely, there's a SSO integration between your solution and Qlik Sense, so 
 
 &nbsp;
 
-The migration journey from client-managed to SaaS looks different depending on the use case. For example, if the configured IdP in client-managed is the same in SaaS, then the SA table can be exactly the same. However, if we have different identity provides on both ends, then the SA table will require some adjustaments to work in SaaS. Next section provides more details for each use case.
+The migration journey from client-managed to SaaS looks different depending on the use case. For example, if the configured IdP in client-managed is the same in SaaS, then the SA table can be exactly the same. However, if we have different identity provides on both ends, then the SA table will require some adjustaments to work in SaaS. Next section provides more details for each use case:
+
+1. Same custom IdP in both client-managed and SaaS
+2. Different custom IdP between client-managed and SaaS
+3. Custom IdP in client-managed and JWT authentication in SaaS
+4. Custom IdP in client-managed and Qlik IdP in SaaS
 
 &nbsp;
 
@@ -204,9 +209,9 @@ Authorization script:
 
 Note that Qlik Sense SaaS will get the information from the `groups` claim of the configured identity provider (JWT) and compare it to the value in this field. For group-level security, you can link data restrictions to values in the field GROUP, then set USER.EMAIL to asterisk `"*"`. This simplifies and reduces the amount of rows to be scanned in the SA table every time the app is opened by a user.
 
-### **4. Custom IdP in client-managed and Qlik IdP in SaaS**
-
 &nbsp;
+
+### **4. Custom IdP in client-managed and Qlik IdP in SaaS**
 
 In this case, the subject claim cannot be mapped to a custom value and it's an auto-generated string e.g. `auth0|a08D000001C6YtJIAV` that can be viewed in **Users** section of the **Management Console**.
 
@@ -222,7 +227,7 @@ _User groups are not supported when using Qlik Identity Provider (IdP)_
     Section Access;
     LOAD * inline [
         ACCESS, USERID, COUNTRY, OMIT
-        ADMIN, auth0|a08D000001C6YtJIAV, 
+        ADMIN, auth0|a08D000001C6YtJIAV, *
         USER, auth0|a08D00000190d9UIAQ, SPAIN, MARGIN
         ADMIN, INTERNAL\SA_SCHEDULER, *
     ];

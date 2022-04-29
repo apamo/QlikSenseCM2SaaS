@@ -139,7 +139,7 @@ This is the easiest implementation because the same SA table can be reused as is
 
 &nbsp;
 
-![Example of same IdP in client-managed and SaaS deployment](./images/Example%20of%20IdPs%20in%20a%20multi-cloud%20deployment.png)
+![Example of same IdP in client-managed and SaaS deployment](./images/Example%20of%20same%20IdP%20in%20client-managed%20and%20SaaS%20deployment.png)
 
 &nbsp;
 

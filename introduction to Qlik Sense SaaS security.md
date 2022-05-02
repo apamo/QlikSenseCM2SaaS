@@ -11,18 +11,32 @@ We also assume you have a multi-tenant SaaS platform in which you want to embed 
 In the end you want to provide an integrated view of Qlik Sense in your software. The user should be able to access only his authorized data in a seamless way. Also the user should be able to view Qlik Sense without having to authenticate again (SSO). You also want to make sure that the right Qlik Sense content is shown in an automated way with a minimum amount of manual work.
 
 ## Difference SaaS and CM: authentication overview
+In SaaS you can use OIDC or JWT to authenticate. For embedding/OEM use cases normally JWT is used. For OIDC you have the following options:
 ![image](https://user-images.githubusercontent.com/12411165/166253783-24286f37-56bd-4bea-a865-896a0499c44d.png)
 
+OIDC and JWT are both already available on Qlik Sense CM.
 
-### additional options
-![image](https://user-images.githubusercontent.com/12411165/166253846-c4ba9d3f-7268-4f02-96b2-5874e53b3118.png)
+### Difference SaaS and CM: OIDC
+There should not be a lot of difference between SaaS and CM use of OIDC. For use on windows machines you can [check this guide](https://help.qlik.com/en-US/sense-admin/February2022/Subsystems/DeployAdministerQSE/Content/Sense_DeployAdminister/QSEoW/Administer_QSEoW/Managing_QSEoW/OIDC-configuration-Auth0.htm) [for SaaS you can check this guide](https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/Admin/OIDC-intro.htm)
 
+### Difference SaaS and CM: JWT
+JWT does have some slight differences. The idea is the same but the endpoints have changed. The basic idea is still that you
+- create a jwt on the server side of your host application (your web server)
+- when you open a Qlik Sense page you include the JWT in the header of the request
+- Qlik Sense will now supply a cookie to be used in further requests. 
 
-### OIDC mappings
+In windows the flow was like this:
 
-![image](https://user-images.githubusercontent.com/12411165/166253011-1ae7abb7-bb34-43ca-88b9-85983da00645.png)
+![image](https://user-images.githubusercontent.com/12411165/166260604-c7b1c90d-c8d1-40c9-92c3-1ca2fa04056f.png)
 
+In SaaS we don't have virtual proxies anymore. There is just one URL to use: your Qlik SaaS tenant. 
 
+SaaS JWT implementation guides
+- [Qlik Sense Saas: mashup with JWT authentication](https://github.com/jackBrioschi/Basic_Mashup_with_JWT_Authentication_Qlik_Sense_SaaS). The goal of this project is to show how it works a mashup on Qlik Cloud Services with a JWT authentication. In particular, the use case I developed is related to a single cloud tenant environment and uses a combination of REST and Javascript APIs to set-up a mashup integration.
+- [Create Signed Tokens for JWT Authorization](https://qlik.dev/tutorials/create-signed-tokens-for-jwt-authorization) Configure Qlik Sense SaaS tenant to use JWT for authorization
+- [Implement JWT Authorization](https://qlik.dev/tutorials/implement-jwt-authorization) Configure a Qlik Cloud tenant to use JWT authorization
+
+[Setup JWT for windows](https://integration.qlik.com/?selection=ALkrMhX8JgMMtgRcJ)
 
 ## Difference SaaS and CM: authorization overview
 We make a division for 
@@ -79,6 +93,14 @@ Likely want to change to something like <DOMAIN>\<UserID> so that it is readable
   
   
 # OIDC and authorization setup tips
+  
+## SaaS additional authentication options
+![image](https://user-images.githubusercontent.com/12411165/166253846-c4ba9d3f-7268-4f02-96b2-5874e53b3118.png)
+
+## OIDC mappings
+
+![image](https://user-images.githubusercontent.com/12411165/166253011-1ae7abb7-bb34-43ca-88b9-85983da00645.png)
+
   
 You can re-use the groups of your host application. Be aware that you first have to login with a user and (a lot of groups) in order for the groups to appear in the drop down list next to a space. 
 

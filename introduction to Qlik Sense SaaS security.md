@@ -105,7 +105,7 @@ Use either USERID or USER.EMAIL (not both) for user-level security
 The subject is critical to Qlik, as it can be used for Section Access and must match verbatim for hybrid deployments
 By default, most IdPs will send a random unique ID that is not user friendly
 Likely want to change to something like <DOMAIN>\<UserID> so that it is readable and so that the user will match verbatim in other Qlik environments
-![image](https://user-images.githubusercontent.com/12411165/166254182-84ee5c3d-1c18-4fc3-862d-46e085446f99.png)
+![image](https://user-images.githubusercontent.com/12411165/166264441-7a2c415b-8226-4b2a-bd43-ab1b0457fe50.png)
   
   
 # OIDC and authorization setup tips

@@ -85,12 +85,12 @@ Apps in managed spaces are developed in personal or shared spaces and published 
 Managed spaces can only be created by tenant or analytics administrators, or users with the ManagedSpaceCreator role.
 
 
-### data authorizations (section access)
-Section access is basically the same as in CM. 
+### Data authorizations (section access)
+Section access is basically the same as in CM. Emails can be used in section access
 
-![image](https://user-images.githubusercontent.com/12411165/166254002-fc2b89d5-361a-4907-a083-c23d961e347c.png)
+![image](https://user-images.githubusercontent.com/12411165/166264126-d5335fab-15d2-47f1-b850-a386ee2be3d3.png)
 
-####Entitlements
+#### Entitlements
 Entitlements Associate with Data Model to drive data visibility
 Associate one data element to drive visibility across entire data model
 Row and column level

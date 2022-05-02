@@ -12,12 +12,18 @@ In the end you want to provide an integrated view of Qlik Sense in your software
 
 ## Difference SaaS and CM: authentication overview
 In SaaS you can use OIDC or JWT to authenticate. For embedding/OEM use cases normally JWT is used. For OIDC you have the following options:
-![image](https://user-images.githubusercontent.com/12411165/166253783-24286f37-56bd-4bea-a865-896a0499c44d.png)
+
+![image](https://user-images.githubusercontent.com/12411165/166262153-2aa15a45-f272-43fb-bcea-c6f4bb133a82.png)
+
 
 OIDC and JWT are both already available on Qlik Sense CM.
 
+There is another difference: the use of developer keys. Developer keys are only used on SaaS, they enable a developer to make code which executes API calls on a users behalf. If you create a key the key will have the same access rights as the user who created the key. So if John creates a key, and Simon uses the key, he will have the same rights as John for these API calls. Use the links below for more information
+- [qlik.dev, create your first API key](https://qlik.dev/tutorials/generate-your-first-api-key)
+- [Qlik help](https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/Admin/mc-generate-api-keys.htm)
+
 ### Difference SaaS and CM: OIDC
-There should not be a lot of difference between SaaS and CM use of OIDC. For use on windows machines you can [check this guide](https://help.qlik.com/en-US/sense-admin/February2022/Subsystems/DeployAdministerQSE/Content/Sense_DeployAdminister/QSEoW/Administer_QSEoW/Managing_QSEoW/OIDC-configuration-Auth0.htm) [for SaaS you can check this guide](https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/Admin/OIDC-intro.htm)
+There should not be a lot of difference between SaaS and CM use of OIDC. [For use on windows machines you can check this guide](https://help.qlik.com/en-US/sense-admin/February2022/Subsystems/DeployAdministerQSE/Content/Sense_DeployAdminister/QSEoW/Administer_QSEoW/Managing_QSEoW/OIDC-configuration-Auth0.htm),  [for SaaS you can check this guide](https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/Admin/OIDC-intro.htm)
 
 ### Difference SaaS and CM: JWT
 JWT does have some slight differences. The idea is the same but the endpoints have changed. The basic idea is still that you
@@ -59,7 +65,6 @@ Qlik SaaS ingests the user information and propagates it to multiple components.
 - Apps
 
 We’ll cover spaces in more detail next, but the key take-away is that the same identity is being used for both access to resources as well as access to columns or rows when using Qlik’s technique for column and/or row level security, Section Access
-![image](https://user-images.githubusercontent.com/12411165/166256106-2c564a32-01ed-4efb-91bd-be3ff74922a3.png)
 
 Spaces come in 3 types to give you control about what users can do to an app
 ![image](https://user-images.githubusercontent.com/12411165/166256470-009146b0-549c-47cd-85e0-228fff938c07.png)
@@ -85,6 +90,17 @@ Section access is basically the same as in CM.
 
 ![image](https://user-images.githubusercontent.com/12411165/166254002-fc2b89d5-361a-4907-a083-c23d961e347c.png)
 
+####Entitlements
+Entitlements Associate with Data Model to drive data visibility
+Associate one data element to drive visibility across entire data model
+Row and column level
+Use either USERID or USER.EMAIL (not both) for user-level security
+
+
+![image](https://user-images.githubusercontent.com/12411165/166262478-578683cc-c16c-4b8e-ab8c-2cfb77d71554.png)
+
+
+
 ### Subject attribute
 The subject is critical to Qlik, as it can be used for Section Access and must match verbatim for hybrid deployments
 By default, most IdPs will send a random unique ID that is not user friendly
@@ -99,8 +115,7 @@ Likely want to change to something like <DOMAIN>\<UserID> so that it is readable
 
 ## OIDC mappings
 
-![image](https://user-images.githubusercontent.com/12411165/166253011-1ae7abb7-bb34-43ca-88b9-85983da00645.png)
-
+![image](https://user-images.githubusercontent.com/12411165/166262765-17acba61-c85d-4565-b7ab-47d6da3daea3.png)
   
 You can re-use the groups of your host application. Be aware that you first have to login with a user and (a lot of groups) in order for the groups to appear in the drop down list next to a space. 
 
@@ -119,9 +134,10 @@ You can use the CLI or other API method to programmatically inject users into Ql
 
 Make sure you validate your claims mapping as shown below. ![image](https://user-images.githubusercontent.com/12411165/166255119-197f2761-59da-49dc-ae71-a02b65cbd6de.png)
 
- ## Diagnose claims
+## Diagnose claims
 Navigate to https://<tenant>.<region>.qlikcloud.com/api/v1/diagnose-claims
 Useful post-IdP setup to see groups/what else IdP is sending and how they are mapped
+  
 ![image](https://user-images.githubusercontent.com/12411165/166255680-aad1aef5-92d8-48da-8377-c2f2147ed206.png)
 
 ## OIDC ID token

@@ -148,3 +148,10 @@ Useful post-IdP setup to see groups/what else IdP is sending and how they are ma
 
 # Source
 Images and text from this document also originate from Levi Turner and Daniel Pilla. Thanks for the great assets guys!
+
+  
+  &nbsp;
+___
+Written by *Martijn Biesbroek & Alvaro Palacios*  
+OEM EMEA Presales Team at Qlik   
+[www.qlik.com](https://www.qlik.com)

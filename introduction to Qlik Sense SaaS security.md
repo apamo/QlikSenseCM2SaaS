@@ -26,17 +26,50 @@ There is another difference: the use of developer keys. Developer keys are only 
 There should not be a lot of difference between SaaS and CM use of OIDC. [For use on windows machines you can check this guide](https://help.qlik.com/en-US/sense-admin/February2022/Subsystems/DeployAdministerQSE/Content/Sense_DeployAdminister/QSEoW/Administer_QSEoW/Managing_QSEoW/OIDC-configuration-Auth0.htm),  [for SaaS you can check this guide](https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/Admin/OIDC-intro.htm)
 
 ### Difference SaaS and CM: JWT
-JWT does have some slight differences. The idea is the same but the endpoints have changed. The basic idea is still that you
+JWT does have some slight differences. The idea is the same but the endpoints and the contents of the JWT have changed. The basic idea is still that you
 - create a jwt on the server side of your host application (your web server)
 - when you open a Qlik Sense page you include the JWT in the header of the request
 - Qlik Sense will now supply a cookie to be used in further requests. 
 
+#### High level flow
 In windows the flow was like this:
 
 ![image](https://user-images.githubusercontent.com/12411165/166260604-c7b1c90d-c8d1-40c9-92c3-1ca2fa04056f.png)
 
-In SaaS we don't have virtual proxies anymore. There is just one URL to use: your Qlik SaaS tenant. 
+In SaaS we don't have virtual proxies anymore. There is just one URL to use: your Qlik SaaS tenant. The flow in SaaS is like this
 
+![image](https://user-images.githubusercontent.com/12411165/166661007-ad2b1e5e-788b-433c-9280-c96dd0526c93.png)
+
+or more detailed:
+
+![image](https://user-images.githubusercontent.com/12411165/166661328-ab1adef5-e7fe-4700-bde6-489524504fb8.png)
+
+note: that when you receive your session cookie, you can just open the hub an app, or do anything you like with the APIs. 
+
+#### JWT contents
+Before we go into the details, what is a JWT? JSON Web Token (JWT) is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object.
+
+A JWT consists of three parts: a header, a payload, and a signature.
+
+![image](https://user-images.githubusercontent.com/12411165/166662255-10bfb81a-02c0-458b-8f5d-7defd3e2ee48.png)
+
+So a JWT is basically like a passport, you created it in a secure environment by a trusted party (the government), once you created it you provide some tools/scanners that can validate whether the passport is real (the `verify signature` part by means of a hash). 
+
+Back to our multi-tenant environment, so once you created the JWT/passport and share it with another system (like Qlik SaaS), it can also see who the user is, and to what groups it belongs. So in these groups you can put your tenant name/id, the groups the user has access to inside the tenant. 
+
+![image](https://user-images.githubusercontent.com/12411165/166662122-ac3a4b17-a1b8-468f-a4dd-cb00443ee657.png)
+
+
+Two new required attributes for the JWT
+- jti: unique string value prevents reuse of jwt from different origin
+Typically part of jwt payload
+- nbf: (aka notBefore) is a timestamp specifying when the jwt becomes valid for use
+Typically part of jwt signing options![image](https://user-images.githubusercontent.com/12411165/166661836-7d26e971-9601-4b93-af15-4f72f2459e24.png)
+
+
+
+
+#### Manuals
 SaaS JWT implementation guides
 - [Qlik Sense Saas: mashup with JWT authentication](https://github.com/jackBrioschi/Basic_Mashup_with_JWT_Authentication_Qlik_Sense_SaaS). The goal of this project is to show how it works a mashup on Qlik Cloud Services with a JWT authentication. In particular, the use case I developed is related to a single cloud tenant environment and uses a combination of REST and Javascript APIs to set-up a mashup integration.
 - [Create Signed Tokens for JWT Authorization](https://qlik.dev/tutorials/create-signed-tokens-for-jwt-authorization) Configure Qlik Sense SaaS tenant to use JWT for authorization

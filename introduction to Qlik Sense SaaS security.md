@@ -59,14 +59,22 @@ Back to our multi-tenant environment, so once you created the JWT/passport and s
 
 ![image](https://user-images.githubusercontent.com/12411165/166662122-ac3a4b17-a1b8-468f-a4dd-cb00443ee657.png)
 
+#### JWT key difference with CM
 
-Two new required attributes for the JWT
+The required claims for a Qlik JWT payload are the following:
+
+jti - (JWT ID) claim provides a unique identifier for the JWT.
+sub - The main identifier (aka subject) of the user.
+subType - The type of identifier the sub represents. In this case, user is the only applicable value.
+name - The friendly name to apply to the user.
+email - The email address of the user.
+email_verified - A claim indicating to Qlik that the JWT source has verified that the email address belongs to the subject.
+
+Two new required attributes for the JWT are (June 2022)
 - jti: unique string value prevents reuse of jwt from different origin
 Typically part of jwt payload
 - nbf: (aka notBefore) is a timestamp specifying when the jwt becomes valid for use
-Typically part of jwt signing options![image](https://user-images.githubusercontent.com/12411165/166661836-7d26e971-9601-4b93-af15-4f72f2459e24.png)
-
-
+Typically part of jwt signing options
 
 
 #### Manuals

@@ -63,12 +63,12 @@ Back to our multi-tenant environment, so once you created the JWT/passport and s
 
 The required claims for a Qlik JWT payload are the following:
 
-jti - (JWT ID) claim provides a unique identifier for the JWT.
-sub - The main identifier (aka subject) of the user.
-subType - The type of identifier the sub represents. In this case, user is the only applicable value.
-name - The friendly name to apply to the user.
-email - The email address of the user.
-email_verified - A claim indicating to Qlik that the JWT source has verified that the email address belongs to the subject.
+- jti - (JWT ID) claim provides a unique identifier for the JWT.
+- sub - The main identifier (aka subject) of the user.
+- subType - The type of identifier the sub represents. In this case, user is the only applicable value.
+- name - The friendly name to apply to the user.
+- email - The email address of the user.
+- email_verified - A claim indicating to Qlik that the JWT source has verified that the email address belongs to the subject.
 
 Two new required attributes for the JWT are (June 2022)
 - jti: unique string value prevents reuse of jwt from different origin

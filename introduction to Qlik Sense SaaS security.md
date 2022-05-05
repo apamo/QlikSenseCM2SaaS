@@ -57,6 +57,8 @@ So a JWT is basically like a passport, you created it in a secure environment by
 
 Back to our multi-tenant environment, so once you created the JWT/passport and share it with another system (like Qlik SaaS), it can also see who the user is, and to what groups it belongs. So in these groups you can put your tenant name/id, the groups the user has access to inside the tenant. 
 
+In the image below you can find a javascript example on how to make a jwt.
+
 ![image](https://user-images.githubusercontent.com/12411165/166662122-ac3a4b17-a1b8-468f-a4dd-cb00443ee657.png)
 
 #### JWT key difference with CM

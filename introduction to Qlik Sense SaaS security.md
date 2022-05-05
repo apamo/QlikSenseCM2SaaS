@@ -16,14 +16,18 @@ In SaaS you can use OIDC or JWT to authenticate. For embedding/OEM use cases nor
 ![image](https://user-images.githubusercontent.com/12411165/166262153-2aa15a45-f272-43fb-bcea-c6f4bb133a82.png)
 
 
-OIDC and JWT are both already available on Qlik Sense CM.
+OIDC and JWT are both also available on Qlik Sense CM. (But CM has more options like header, SAML, ticketing, AD, that are not available on SaaS.
 
 There is another difference: the use of developer keys. Developer keys are only used on SaaS, they enable a developer to make code which executes API calls on a users behalf. If you create a key the key will have the same access rights as the user who created the key. So if John creates a key, and Simon uses the key, he will have the same rights as John for these API calls. Use the links below for more information
 - [qlik.dev, create your first API key](https://qlik.dev/tutorials/generate-your-first-api-key)
 - [Qlik help](https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/Admin/mc-generate-api-keys.htm)
 
 ### Difference SaaS and CM: OIDC
-There should not be a lot of difference between SaaS and CM use of OIDC. [For use on windows machines you can check this guide](https://help.qlik.com/en-US/sense-admin/February2022/Subsystems/DeployAdministerQSE/Content/Sense_DeployAdminister/QSEoW/Administer_QSEoW/Managing_QSEoW/OIDC-configuration-Auth0.htm),  [for SaaS you can check this guide](https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/Admin/OIDC-intro.htm)
+There should not be a lot of difference between SaaS and CM use of OIDC. 
+
+OIDC guides:
+- [Client managed OIDC guide](https://help.qlik.com/en-US/sense-admin/February2022/Subsystems/DeployAdministerQSE/Content/Sense_DeployAdminister/QSEoW/Administer_QSEoW/Managing_QSEoW/OIDC-configuration-Auth0.htm), 
+- [SaaS OIDC guide](https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/Admin/OIDC-intro.htm)
 
 ### Difference SaaS and CM: JWT
 JWT does have some slight differences. The idea is the same but the endpoints and the contents of the JWT have changed. The basic idea is still that you
@@ -32,7 +36,7 @@ JWT does have some slight differences. The idea is the same but the endpoints an
 - Qlik Sense will now supply a cookie to be used in further requests. 
 
 #### High level flow
-In windows the flow was like this:
+In client managed (CM) the flow was like this:
 
 ![image](https://user-images.githubusercontent.com/12411165/166260604-c7b1c90d-c8d1-40c9-92c3-1ca2fa04056f.png)
 
@@ -44,7 +48,7 @@ or more detailed:
 
 ![image](https://user-images.githubusercontent.com/12411165/166661328-ab1adef5-e7fe-4700-bde6-489524504fb8.png)
 
-note: that when you receive your session cookie, you can just open the hub an app, or do anything you like with the APIs. 
+Note: that when you receive your session cookie, you can just open the hub an app, or do anything you like with the APIs. 
 
 #### JWT contents
 Before we go into the details, what is a JWT? JSON Web Token (JWT) is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object.

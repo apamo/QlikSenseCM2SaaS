@@ -241,4 +241,8 @@ _User groups are not supported when using Qlik Identity Provider (IdP)_
 
 Visit our [Online Help](https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/Scripting/Security/manage-security-with-section-access.htm#anchor-9) to review some important facts and helpful hints to know about Section Access regarless of your deployment type, i.e. this applies to both client-managed and SaaS.
 
-
+&nbsp;
+___
+Written by Martijn Biesbroek & Alvaro Palacios   
+OEM EMEA Presales Team at Qlik   
+[www.qlik.com](https://www.qlik.com)

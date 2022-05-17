@@ -137,8 +137,6 @@ The migration journey from client-managed to SaaS looks different depending on t
 
 This is the easiest implementation because the same SA table can be reused as is and ported directly to SaaS. This SA security table uses USER.ID system field to give access to data. Regardless of the mappings donde in your IdP i.e. internal Windows identity, email address, or any other custom values, this will seamlessly work in SaaS since the same IdP configured in client-managed will be used in SaaS. Just remember that your configured IdP in client-managed must be compatible with the OIDC protocol to work with SaaS.
 
-&nbsp;
-
 ![Example of same IdP in client-managed and SaaS deployment](https://user-images.githubusercontent.com/10588391/168803293-4b355da8-72bf-4041-8287-ed926d04b038.png)
 
 &nbsp;
@@ -188,11 +186,7 @@ Authorization script:
 
 ### **3. Custom IdP in client-managed and JWT authentication in SaaS**
 
-&nbsp;
-
 When using JWT auth in SaaS, the subject claim `sub` and the email address claim `email` are custom values defined in the JWT payload. Therefore, you can use either the value in `sub` when using USERID or `email` when using USER.EMAIL inside your SA table. You cannot use both at the same time.
-
-&nbsp;
 
 ![Accessing Qlik Sense SaaS with a signed JWT](https://help.qlik.com/en-US/sense-admin/February2022/Subsystems/DeployAdministerQSE/Content/Resources/Images/dr_QlikSenseAccessJWT.png)
 

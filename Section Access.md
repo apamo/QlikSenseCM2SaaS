@@ -60,6 +60,8 @@ Then you SA table must contain a number of data reduction fields to restrict acc
     RecNo() AS NUM  
     AUTOGENERATE 3;
 
+&nbsp;
+
 If you were to import your app in client-managed to SaaS and try to reuse this same SA table, most likely, it won't work well because the USERID field in the SA table is compared to the value of the `subject claim` from Qlik IdP or custom IdP that supports OIDC as shown below:
 
 ![Example of IdP in a SaaS deployment](https://user-images.githubusercontent.com/10588391/168802744-11655280-1f7e-4a4f-8a66-b3870fe79984.png)
@@ -83,8 +85,6 @@ The other system fields are optional:
 - NTNAME
 - GROUP
 - OMIT  
-
-&nbsp;
 
 ### **Important Considerations:**
 

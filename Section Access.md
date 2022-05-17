@@ -120,8 +120,6 @@ This user guide is targeting Qlik's OEM partners who currently use Qlik Sense Cl
 
 Most likely, there's a SSO integration between your solution and Qlik Sense, so you're leaning on your existing authentication mechanism to avoid replication of users and groups in Qlik Sense. This can be achieved using several methods (see image below) in client-managed, being Web Ticketing the most commonly used since [it's relatively easy to setup](https://community.qlik.com/t5/Knowledge/Qlik-Sense-for-Windows-All-you-need-to-know-to-start-using/ta-p/1758478):
 
-&nbsp;
-
 ![Authentication Methods in Qlik Sense Client-managed](https://user-images.githubusercontent.com/10588391/168802912-b8fabc82-0901-4350-860b-a35ff75fbef9.png)
 
 &nbsp;

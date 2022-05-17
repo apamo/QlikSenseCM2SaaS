@@ -5,7 +5,7 @@ This user guide describes the outline for allowing OEM partners to successfully 
 
 SA mechanism is used in Qlik Sense (both Windows and SaaS) for dynamic data reduction by the Qlik Engine to provide a different view of the data within the same dashboard layout. In other words, this allows to control the security of an application at the row and column level. This mechanism is part of our **security model** in SaaS as depicted below:
 
-![Security model in SaaS provides data authorization mechanism](./images/Security%20Model%20in%20SaaS.png)
+![Security Model in Qlik Sense SaaS](https://user-images.githubusercontent.com/10588391/168802513-81c52f73-a380-4bb0-9b7f-0ed2d0cc1917.png)
 
 &nbsp;
 
@@ -24,7 +24,9 @@ Next two sections in this document are meant to review how the SA mechanism work
 
 If your apps in client-managed use SA today then probably have a security table loaded at the beginning of your app's load script that connects to the data model through one or several reduction fields:
 
-![section access table in load script](https://i.ytimg.com/vi/b-UNTSymHj4/maxresdefault.jpg)
+![Section access security table in load script](https://user-images.githubusercontent.com/10588391/168802565-c670907c-9e1c-4a86-9003-1192ed644083.png)
+
+&nbsp;
 
 In client-managed the SA table must contain a minimum of two system fields:
 - ACCESS
@@ -60,7 +62,9 @@ Then you SA table must contain a number of data reduction fields to restrict acc
 
 If you were to import your app in client-managed to SaaS and try to reuse this same SA table, most likely, it won't work well because the USERID field in the SA table is compared to the value of the `subject claim` from Qlik IdP or custom IdP that supports OIDC as shown below:
 
-![Custom IdP in a SaaS deployment](./images/Example%20of%20IdP%20in%20a%20SaaS%20deployment.png)  
+![Example of IdP in a SaaS deployment](https://user-images.githubusercontent.com/10588391/168802744-11655280-1f7e-4a4f-8a66-b3870fe79984.png)
+
+&nbsp;
 
 Next, we're going to review how Section Access looks like in SaaS, what the mandatory system fields are, etc. and later in this document, how to make the necessary adjustments to port or migrate to SaaS the SA security table you currently use in your client-managed deployment.
 
@@ -118,7 +122,7 @@ Most likely, there's a SSO integration between your solution and Qlik Sense, so 
 
 &nbsp;
 
-![Authentication mechanisms in Qlik Sense Client-managed](./images/Authentication%20Methods.png)
+![Authentication Methods in Qlik Sense Client-managed](https://user-images.githubusercontent.com/10588391/168802912-b8fabc82-0901-4350-860b-a35ff75fbef9.png)
 
 &nbsp;
 
@@ -139,7 +143,7 @@ This is the easiest implementation because the same SA table can be reused as is
 
 &nbsp;
 
-![Example of same IdP in client-managed and SaaS deployment](./images/Example%20of%20same%20IdP%20in%20client-managed%20and%20SaaS%20deployment.png)
+![Example of same IdP in client-managed and SaaS deployment](https://user-images.githubusercontent.com/10588391/168803293-4b355da8-72bf-4041-8287-ed926d04b038.png)
 
 &nbsp;
 
@@ -159,7 +163,10 @@ Authorization script:
 ### **2. Different custom IdP between client-managed and SaaS**
 
 &nbsp;
-![Example of different IdPs in a multi-cloud deployment](./images/Example%20of%20different%20IdP%20in%20client-managed%20and%20SaaS%20deployment.png)
+
+![Example of different IdP in client-managed and SaaS deployment](https://user-images.githubusercontent.com/10588391/168803378-6c2ecdec-8dc4-4ad8-acbe-d98b9aedcaed.png)
+
+&nbsp;
 
 In this case, the original SA table used in client-managed isn't 100% compatible with SaaS so it needs to be adjusted.
 - Most likely we'll have a conflict in the field USER.ID. The original values won't match the values stored in your IdP connected to SaaS, and so this column needs to be mapped against the new values in your IdP. Alternatively, the original values could be mapped in the IdP in SaaS but this requires working with the IdP configuration e.g. Okta, Auth0, ADFS, etc. rather than making changes in the authorization script.
@@ -217,7 +224,7 @@ In this case, the subject claim cannot be mapped to a custom value and it's an a
 
 &nbsp;
 
-![user in SaaS tenant configured with Qlik IdP](./images/Users%20with%20Qlik%20IdP.png)
+![Users in SaaS Management Console configured with Qlik IdP](https://user-images.githubusercontent.com/10588391/168804006-831e5ae4-3efc-4f1d-b586-ca86f17f7ab2.png)
 
 &nbsp;
 
@@ -237,7 +244,7 @@ _User groups are not supported when using Qlik Identity Provider (IdP)_
 
 
 
-## Guidelines and Tips for using Section Access.
+## Guidelines and Tips for using Section Access
 
 Visit our [Online Help](https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/Scripting/Security/manage-security-with-section-access.htm#anchor-9) to review some important facts and helpful hints to know about Section Access regarless of your deployment type, i.e. this applies to both client-managed and SaaS.
 

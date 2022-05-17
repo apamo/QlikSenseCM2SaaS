@@ -135,8 +135,6 @@ The migration journey from client-managed to SaaS looks different depending on t
 
 ### **1. Same custom IdP in both client-managed and SaaS**
 
-&nbsp;
-
 This is the easiest implementation because the same SA table can be reused as is and ported directly to SaaS. This SA security table uses USER.ID system field to give access to data. Regardless of the mappings donde in your IdP i.e. internal Windows identity, email address, or any other custom values, this will seamlessly work in SaaS since the same IdP configured in client-managed will be used in SaaS. Just remember that your configured IdP in client-managed must be compatible with the OIDC protocol to work with SaaS.
 
 &nbsp;
@@ -160,13 +158,12 @@ Authorization script:
 
 ### **2. Different custom IdP between client-managed and SaaS**
 
-&nbsp;
+In this case, the original SA security table used in client-managed isn't 100% compatible with SaaS so it needs to be adjusted.
 
 ![Example of different IdP in client-managed and SaaS deployment](https://user-images.githubusercontent.com/10588391/168803378-6c2ecdec-8dc4-4ad8-acbe-d98b9aedcaed.png)
 
 &nbsp;
 
-In this case, the original SA table used in client-managed isn't 100% compatible with SaaS so it needs to be adjusted.
 - Most likely we'll have a conflict in the field USER.ID. The original values won't match the values stored in your IdP connected to SaaS, and so this column needs to be mapped against the new values in your IdP. Alternatively, the original values could be mapped in the IdP in SaaS but this requires working with the IdP configuration e.g. Okta, Auth0, ADFS, etc. rather than making changes in the authorization script.
 - For an alternate way to verify user identity using email address, see the field USER.EMAIL. Using USER.EMAIL instead of USERID is more practical and recommended in SaaS.
 - Generally speaking, use either USERID or USER.EMAIL (not both) for user-level security

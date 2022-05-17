@@ -184,6 +184,8 @@ Authorization script:
         USER,    *,           stefan.svensson@example.com,  Sweden
     ];	
 
+&nbsp;
+
 ### **3. Custom IdP in client-managed and JWT authentication in SaaS**
 
 When using JWT auth in SaaS, the subject claim `sub` and the email address claim `email` are custom values defined in the JWT payload. Therefore, you can use either the value in `sub` when using USERID or `email` when using USER.EMAIL inside your SA table. You cannot use both at the same time.
@@ -211,8 +213,6 @@ Note that Qlik Sense SaaS will get the information from the `groups` claim of th
 
 In this case, the subject claim cannot be mapped to a custom value and it's an auto-generated string e.g. `auth0|a08D000001C6YtJIAV` that can be viewed in **Users** section of the **Management Console**.
 
-&nbsp;
-
 ![Users in SaaS Management Console configured with Qlik IdP](https://user-images.githubusercontent.com/10588391/168804006-831e5ae4-3efc-4f1d-b586-ca86f17f7ab2.png)
 
 &nbsp;
@@ -229,9 +229,6 @@ _User groups are not supported when using Qlik Identity Provider (IdP)_
     ];
 
 &nbsp;
-
-
-
 
 ## Guidelines and Tips for using Section Access
 

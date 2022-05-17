@@ -12,7 +12,7 @@ Take as an example a passanger at the airport going through security control and
 
 &nbsp;
 
-![Airport Example Authentication and Authorization​](./images/Airport%20Example%20Authentication%20and%20Authorization%E2%80%8B.png)
+![Airport Example Authentication and Authorization](https://user-images.githubusercontent.com/10588391/168805817-9303a60e-6dd1-46fe-a972-37c06b7337a1.png)
 Author: _Martijn Biesbroek & Raymond Neves_
 
 &nbsp;
@@ -32,7 +32,7 @@ The OEM EMEA team at Qlik created as well its own Client-managed content for OEM
 
 &nbsp;
 
-![Qlik Sense Integrated Authentication and Authorization](./images/Qlik%20Sense%20Integrated%20Authentication%20and%20Authorization%20.png)
+![Qlik Sense Integrated Authentication and Authorization](https://user-images.githubusercontent.com/10588391/168805916-3e394f0e-128f-4b25-bae6-852a1da41630.png)
 Author: _Martijn Biesbroek & Raymond Neves_
 
 &nbsp;
@@ -129,15 +129,46 @@ Here is a sample of the signing options in JWT including the new mandatory atttr
 
 In [Qlik.dev](www.qlik.dev) you can learn how to enable JWT in your SaaS tenant, configure a web app to create a JWT token, and authenticate a user into SaaS to view embedded visualizations from a Qlik Sense application. Example code is provided in both Qlik's [GitHub](https://github.com/qlik-oss) and [Glitch](https://glitch.com/@qlik) account that can be used for your own reference and implementation.
 
-__- How-to tutorial:__ [Implement JWT Authorization](https://qlik.dev/tutorials/implement-jwt-authorization)  
-__- Example code:__ [Athorize Users with JWTS for Qlik Embedded](https://glitch.com/edit/#!/qlik-cloud-jwt)  
-__- Example code 2:__ [How to use JWT authentication in mashups](https://community.qlik.com/t5/Knowledge/Qlik-Sense-SaaS-How-to-use-JWT-authentication-in-mashups/ta-p/1852388)
+__- Tutorial (How-to):__ [Implement JWT Authorization](https://qlik.dev/tutorials/implement-jwt-authorization)  
+__- Example referenced in the tutorial:__ [Authorize Users with JWT for Qlik Embedded](https://glitch.com/edit/#!/qlik-cloud-jwt)  
+__- Full JavaScript example:__ [How to use JWT authentication in mashups](https://community.qlik.com/t5/Knowledge/Qlik-Sense-SaaS-How-to-use-JWT-authentication-in-mashups/ta-p/1852388)
 
-IMAGE
+Example of JWT creation and signing code:
+
+    const fs = require('fs');
+    const uid = require('uid-safe');
+    const jwt = require('jsonwebtoken');
+
+    const payload = {
+      jti: uid.sync(32), // 32 bytes random string
+      sub: '0hEhiPyhMBdtOCv2UZKoLo4G24p-7R6eeGdZUQHF0-c',
+      subType: 'user',
+      name: 'Alvaro Palacios',
+      email: 'alvaro.palacios@qlik.com',
+      email_verified: true,
+      groups: ['Administrators', 'Presales', 'Qlik'],
+    };
+
+    const privateKey = fs.readFileSync('./certs/privatekey.pem');
+
+    // kid and issuer have to match with the IDP config and the
+    // audience has to be qlik.api/jwt-login-session
+    const signingOptions = {
+      keyid: 'my-custom-jwt',
+      algorithm: 'RS256',
+      issuer: 'https://oemiberia.eu.qlikcloud.com',
+      expiresIn: '6h',
+      notBefore: '0s',
+      audience: 'qlik.api/login/jwt-session',
+    };
+
+    const myToken = jwt.sign(payload, privateKey, signingOptions);
+
+    console.log(myToken);
 
 &nbsp;
 
-Other tutorials for interactive authentication in SaaS:
+Other tutorials for JWT authentication in SaaS:
 - [Create Signed Tokens for JWT Authorization](https://qlik.dev/tutorials/create-signed-tokens-for-jwt-authorization)
 - [Generate your first API Key](https://qlik.dev/tutorials/generate-your-first-api-key)
   

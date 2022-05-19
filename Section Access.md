@@ -207,6 +207,17 @@ Authorization script in a multi-cloud environment using both USERID and USER.EMA
 
 When using JWT auth in SaaS, the subject claim `sub` and the email address claim `email` are defined in the Qlik JWT payload. Hence, you can use either the value in `sub` for USERID or `email` when using USER.EMAIL inside your SA security table. However, you cannot use both values/fields at the same time for data reduction.
 
+    {
+        "jti": "k5bU_cFI4_-vFfpJ3DjDsIZK-ZhJGRbBfusUWZ0ifBI",
+        "sub": "auth0|a08D000001C6YtJIAV",
+        "subType": "user",
+        "name": "Alvaro Palacios",
+        "email": "alvaro.palacios@qlik.com",
+        "email_verified": true,
+        "groups": ["Developers", "Sales", "Presales"]
+    }
+
+
 If you want to use the same SA table in SaaS or maintain a common SA table between client-managed and SaaS (multi-cloud environment), then make sure that you reuse the original values stored in column USERID i.e. DOMAIN\User when creating the Qlik JWT token. 
 
 However, if this is a full switch to SaaS, you might want to consider using USER.EMAIL in the SA table. In this case, you SA table needs to be adjusted accordingly by removing the USERID field and adding USER.EMAIL as shown in the authorization script below:

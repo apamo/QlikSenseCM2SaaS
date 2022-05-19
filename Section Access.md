@@ -162,19 +162,36 @@ In this case, the original SA security table used in client-managed isn't 100% c
 
 &nbsp;
 
-- Most likely we'll have a conflict in the field USER.ID. The original values won't match the values stored in your IdP connected to SaaS, and so this column needs to be mapped against the new values in your IdP. Alternatively, the original values could be mapped in the IdP in SaaS but this requires working with the IdP configuration e.g. Okta, Auth0, ADFS, etc. rather than making changes in the authorization script.
-- For an alternate way to verify user identity using email address, see the field USER.EMAIL. Using USER.EMAIL instead of USERID is more practical and recommended in SaaS.
-- Generally speaking, use either USERID or USER.EMAIL (not both) for user-level security
-- However, if you need to manage user access in a multi-cloud environment i.e. use client-managed and SaaS simultaneously for a while, you can create a SA table that works on both environments. See example below.
+- Most likely we'll have a conflict in the field USERID. The original values won't match the values stored in your IdP connected to SaaS, and so this column needs to be mapped against the new values in your IdP. Alternatively, the original values could be mapped in the IdP in SaaS but this requires working with the IdP configuration e.g. Okta, Auth0, ADFS, etc. rather than making changes in the authorization script.
+- An alternate way to verify user identity is using the user's email address (see the field USER.EMAIL in SA table). Using USER.EMAIL instead of USERID is more practical and generally recommended in SaaS.
+- Note that if you need to manage user access in a multi-cloud environment i.e. use client-managed and SaaS simultaneously for a while, you can create a SA table that works on both environments. See example below.
+- **As a rule of thumb, unless you're working in a multi-cloud environment, use either USERID or USER.EMAIL (not both) for user-level security.**
 
 &nbsp;
 
-Authorization script:
+Authorization script in a multi-cloud environment using only USERID:
+
+    Section Access;
+    LOAD * INLINE [
+        ACCESS,  USERID,         COUNTRY 
+        ADMIN,   DOMAIN\Admin    *              \\ custom IdP in client-managed
+        ADMIN,   REALM\Admin,    *              \\ custom IdP in SaaS
+        USER,    DOMAIN\Joe,     United States          
+        USER,    REALM\Joe,      United States
+        USER,    DOMAIN\Ursula,  Germany
+        USER,    REALM\Ursula,   Germany   
+        USER,    DOMAIN\Stefan,  Sweden
+        USER,    REALM\Stefan,   Sweden
+    ];	
+
+&nbsp;
+
+Authorization script in a multi-cloud environment using both USERID and USER.EMAIL:
 
     Section Access;
     LOAD * INLINE [
         ACCESS,  USERID,      USER.EMAIL,                   COUNTRY 
-        ADMIN,   ABD\Admin    *,                            *
+        ADMIN,   ABC\Admin    *,                            *
         ADMIN,   *,           admin.sense@example.com       *
         USER,    ABC\Joe,     *,                            United States          
         USER,    *,           joe.smith@example.com,        United States
@@ -188,9 +205,11 @@ Authorization script:
 
 ### **3. Custom IdP in client-managed and JWT authentication in SaaS**
 
-When using JWT auth in SaaS, the subject claim `sub` and the email address claim `email` are custom values defined in the JWT payload. Therefore, you can use either the value in `sub` when using USERID or `email` when using USER.EMAIL inside your SA table. You cannot use both at the same time.
+When using JWT auth in SaaS, the subject claim `sub` and the email address claim `email` are defined in the Qlik JWT payload. Hence, you can use either the value in `sub` for USERID or `email` when using USER.EMAIL inside your SA security table. However, you cannot use both values/fields at the same time for data reduction.
 
-![Accessing Qlik Sense SaaS with a signed JWT](https://help.qlik.com/en-US/sense-admin/February2022/Subsystems/DeployAdministerQSE/Content/Resources/Images/dr_QlikSenseAccessJWT.png)
+If you want to use the same SA table in SaaS or maintain a common SA table between client-managed and SaaS (multi-cloud environment), then make sure that you reuse the original values stored in column USERID i.e. DOMAIN\User when creating the Qlik JWT token. 
+
+However, if this is a full switch to SaaS, you might want to consider using USER.EMAIL in the SA table. In this case, you SA table needs to be adjusted accordingly by removing the USERID field and adding USER.EMAIL as shown in the authorization script below:
 
 &nbsp;
 

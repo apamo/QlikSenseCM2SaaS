@@ -80,10 +80,17 @@ Source: [Ticket Authentication API ](https://help.qlik.com/en-US/sense-developer
 
 &nbsp;
 
-___
-## Things to Consider Before Migrating
+Last but not least, an important remark is that, unlike client-managed, virtual proxies don't exist anymore in SaaS. In SaaS you don't need to [create a JWT virtual](https://help.qlik.com/en-US/sense-admin/May2022/Subsystems/DeployAdministerQSE/Content/Sense_DeployAdminister/QSEoW/Administer_QSEoW/Managing_QSEoW/create-virtual-proxy.htm) proxy to perform an HTTP GET call to authenticate an external user. Instead, in the Management Console in SaaS you create a new Identity Provider and choose JWT from the available options. And, there is just one URL to use: your Qlik SaaS tenant to perform an HTTP POST call that will authenticate an external user. The high-level JWT authentication flow in SaaS is as follows:
 
-Before you read the how-to implement tutorial in the next section, there are few things to consider with SaaS JWT. The main goal is to create a SSO auth integration between your solution and QSE SaaS so that users are automatically logged into QSE SaaS when accessing embedded content in a [Qlik Mashup](). Unlike Qlik Sense client-managed, Ticket authentication isn't an option in SaaS so you need to use JWT.
+![image](https://user-images.githubusercontent.com/12411165/166661007-ad2b1e5e-788b-433c-9280-c96dd0526c93.png)
+Author: _Giacomo Brioschi & Martijn Biesbroek_
+
+&nbsp;
+
+___
+## Considerations Before Migrating
+
+Before you go over the how-to assets in the next section, there are few considerations with SaaS JWT. As you know, the end goal is to avoid the interactive login when users access embedded content from a Qlik Sense application. This requires an integration between your solution and QSE SaaS so that users are automatically logged into QSE SaaS i.e. SSO authentication. Unlike Qlik Sense client-managed, Ticket authentication isn't an option in SaaS so the only option available is JWT.
 
 The JWT has basically three pieces or components: the payload, the signing options, the private key for signing the token. Depending on the creation date of your SaaS tenant, there are two additional properties/attributes for the Qlik JWT payload and the signing options:
 

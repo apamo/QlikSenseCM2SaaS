@@ -2,20 +2,56 @@
 
 ## Introduction
 
+An introduction to JSON Web Tokens can be found in this [link](https://jwt.io/introduction).
 
+Basically, JSON Web Token (JWT) is an open standard for secure transmission of information between two parties as a JavaScript Object Notation (JSON) object. JWT is used for authentication and authorization. Because JWT enables single sign-on (SSO), it minimizes the number of times a user has to log on to cloud applications and websites. 
 
+The following example shows the steps involved when gaining access to Qlik Sense by using a signed JWT.
+
+![Accessing Qlik Sense SaaS with a signed JWT](https://help.qlik.com/en-US/sense-admin/February2022/Subsystems/DeployAdministerQSE/Content/Resources/Images/dr_QlikSenseAccessJWT.png)
+
+This [page](https://help.qlik.com/en-US/sense-admin/May2022/Subsystems/DeployAdministerQSE/Content/Sense_DeployAdminister/QSEoW/Administer_QSEoW/Managing_QSEoW/JWT-authentication.htm) from Qlik's Online Help shows the basic concept explained for using JWT in Qlik Sense Client-managed:
+- JWT authentication
+- JWT structure 
+- Standard fields in a JWT claim
+- Limitations
+- [Example code](https://github.com/qlik-oss/enigma.js/tree/master/examples/authentication/sense-using-jwt)
+
+This [article](https://community.qlik.com/t5/Knowledge/Qlik-Sense-How-to-set-up-JWT-authentication/ta-p/1716226) from Qlik Support's Knowledge Base explains how to simply set up JWT authentication using Qlik Sense Client-managed default certificates and test it.
+
+Therefore, planning this migration should be relatively easy for OEM partners, or at least, easier than if you're coming from Sense [Ticket authentication](https://github.com/qlik-oss/enigma.js/tree/master/examples/authentication/sense-using-ticket) for client-managed version. Here, you're already familiar with JWT auth method as it's the current method in place, the token creation process, signing code, etc. Yet, there are some nuances between JWT in SaaS vs client-managed you need to learn about.
 
 &nbsp;
 ___
 ## Key Differences
+JWT authentication in SaaS does have some slight differences compared to the client-managed version using virtual proxies. The idea and concept is the identical but the endpoints and the contents of the JWT have changed in SaaS. The basic idea is still that you:
 
+1. Create a JWT token on the server side of your host application (your web server)
+2. When you access Qlik Sense embedded content you include the JWT in the header of the request
+3. In return, Qlik Sense will now supply a session cookie to be used in further requests to open Qlik Sense content
+
+In client-managed the JWT authentication flow looks like this:
+
+![image](https://user-images.githubusercontent.com/12411165/166260604-c7b1c90d-c8d1-40c9-92c3-1ca2fa04056f.png)  
+Author: _Martijn Biesbroek & Raymond Neves_
+
+&nbsp;
+
+In SaaS we don't have the concept of [Virtual Proxy](https://help.qlik.com/en-US/sense-admin/May2022/Subsystems/DeployAdministerQSE/Content/Sense_DeployAdminister/QSEoW/Administer_QSEoW/Managing_QSEoW/create-virtual-proxy.htm) anymore. There is just one URL to use: your Qlik SaaS tenant. The JWT authentication flow in SaaS looks like this:
+
+![image](https://user-images.githubusercontent.com/12411165/166661007-ad2b1e5e-788b-433c-9280-c96dd0526c93.png)
+Author: _Giacomo Brioschi & Martijn Biesbroek_
+
+&nbsp;
+
+Since virtual proxies don't exist anymore, you don't need to [create virtual proxy](https://help.qlik.com/en-US/sense-admin/May2022/Subsystems/DeployAdministerQSE/Content/Sense_DeployAdminister/QSEoW/Administer_QSEoW/Managing_QSEoW/create-virtual-proxy.htm) for JWT in the QMC to then perform an HTTP GET call to authenticate an external user. Instead, in the Management Console in SaaS you'll create a new Identity Provider and choose JWT from the available options. Then, your host application will perform an HTTP POST call to your Qlik SaaS tenant URL to authenticate an external user.
 
 
 &nbsp;
 ___
-## Things to Consider Before Migrating
+## Considerations Before Migrating
 
-Before you read the how-to implement tutorial in the next section, there are few things to consider with SaaS JWT. The main goal is to create a SSO auth integration between your solution and QSE SaaS so that users are automatically logged into QSE SaaS when accessing embedded content in a [Qlik Mashup](). Unlike Qlik Sense client-managed, Ticket authentication isn't an option in SaaS so you need to use JWT.
+Before you go over the how-to assets in the next section, there are few considerations with SaaS JWT. As you know, the goal is to avoid the interactive login when users access embedded content from a Qlik Sense application. This requires an integration between your solution and QSE SaaS so that users are automatically logged into QSE SaaS i.e. SSO authentication. Unlike Qlik Sense client-managed, Ticket authentication isn't an option in SaaS so the only option available is JWT.
 
 The JWT has basically three pieces or components: the payload, the signing options, the private key for signing the token. Depending on the creation date of your SaaS tenant, there are two additional properties/attributes for the Qlik JWT payload and the signing options:
 

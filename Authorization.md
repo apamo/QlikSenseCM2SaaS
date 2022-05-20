@@ -9,7 +9,7 @@ Current authorization model has the following characteristics:
 - Spaces for collaboration and application level security driven by User / Groups associated with roles (i.e. view, edit, admin, publish)​
 - Section Access for data authorization supports row-level security for users or groups (provide by custom IdP or JWT token).
 
-IMAGE Security Model  
+![Security Model in Qlik Sense Enterprise SaaS](https://user-images.githubusercontent.com/10588391/169544555-e79f3f2b-42aa-49ae-b4a0-7a802b320e96.png) 
 Author: *Levi Turner & Daniel Pilla*
 
 &nbsp;
@@ -23,19 +23,21 @@ ___
 
 - Place to store apps and other assets are now called `Spaces` in SaaS instead of Streams. 
 
-IMAGE Spaces  
-Author: *Levi Turner & Daniel Pilla*
+![Spaces in Qlik Sense Enterprise SaaS](https://user-images.githubusercontent.com/10588391/169544695-872dd7b3-488c-46ec-8eb5-0615db26ed3f.png)
+Author: *Levi Turner & Daniel Pilla*  
+
 &nbsp;
 
 - There are three types of Spaces for different purposes: personal, shared and managed.
 
-IMAGE Space Types  
-Author: *Levi Turner & Daniel Pilla*
+![Space types in Qlik Sense Enterprise SaaS](https://user-images.githubusercontent.com/10588391/169544781-eb9248e3-c464-40bc-9a20-875b43298c52.png)
+Author: *Levi Turner & Daniel Pilla*  
+
 &nbsp;
 
 - Data authorization (Section Access) use either USERID or USER.EMAIL (not both) for user-level security​. See this [article](https://github.com/apamo/QlikSenseCM2SaaS/blob/main/Section%20Access.md) for more detailed information about migrating your SA security table.
 
-IMAGE Section Access
+![Section Access in Qlik Sense Enterprise SaaS](https://user-images.githubusercontent.com/10588391/169544876-a06f13fc-d219-4d8e-bf75-32cbdab03e05.png)
 Author: *Levi Turner & Daniel Pilla*
 
 &nbsp;
@@ -45,7 +47,9 @@ ___
 - Professional end-users can create apps and other assets from scratch - No sensible controls available. That means the `"+ Add new"` button available in the Cloud Hub cannot be hidden/disabled for users with professional entitlement.
 - As we don't security rules we cannot create one global rule to control access to customer Spaces dynamically as it's typically done in OEM scenarios.
 
-IMAGE Security rule for OEM
+![Security rule for access to stream in a multi-tenant environment in Qlik Sense Enterprise Client-managed](https://user-images.githubusercontent.com/10588391/169545220-eacfb848-1eb1-4adf-8ad1-b62587fce048.png)
+
+&nbsp;
 
 - Single SaaS tenant is not designed to host all the OEM partner's customers due to limited multitenancy support:
     - When creating Data Alerts you can list **all users available inside the tenant**.

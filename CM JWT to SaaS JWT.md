@@ -95,7 +95,7 @@ Here is a sample of the signing options in JWT including the new mandatory atttr
 ___
 ## How to Setup JWT in SaaS
 
-In [Qlik.dev](www.qlik.dev) you can learn how to enable JWT in your SaaS tenant, configure a web app to create a JWT token, and authenticate a user into SaaS to view embedded visualizations from a Qlik Sense application. Example code is provided in both Qlik's [GitHub](https://github.com/qlik-oss) and [Glitch](https://glitch.com/@qlik) account that can be used for your own reference and implementation.
+In [Qlik.dev](www.qlik.dev) you can learn how to enable JWT in your SaaS tenant, configure a web app to create a JWT token, and authenticate a user into SaaS to view embedded visualizations from a Qlik Sense application. Example code is provided in both Qlik's [GitHub](https://github.com/qlik-oss/qlik-cloud-jwt) and [Glitch](https://glitch.com/@qlik) account that can be used for your own reference and implementation.
 
 __- How-to tutorial:__ [Implement JWT Authorization](https://qlik.dev/tutorials/implement-jwt-authorization)  
 __- Example code:__ [Athorize Users with JWTS for Qlik Embedded](https://glitch.com/edit/#!/qlik-cloud-jwt)  

@@ -9,10 +9,13 @@ SA mechanism is used in Qlik Sense (both Windows and SaaS) for dynamic data redu
 
 &nbsp;
 
-In the OEM space, Section Access can be leveraged for the following reasons:
+In OEM, Section Access can be leveraged for data reduction/row-level security to support the following use cases:
 
-1. __Segregate customers' data__ within one monolithic app that contains __all__ customer data.
-2. Add row-level security to define __who (users) gets to see what (content)__ when provisioning one app per customer.
+1. __Customer data segregation__ when using one monolithic app that contains __all__ customer data. This means that customer (ID or name field) is the first mandatory reduction field. Additional reduction fields can be added for each customer if their users have different data restrictions e.g. channel, product, region, etc.
+2. __Data segregation by any other concept__ when using one app per end-customer to define who gets to see what data in the app. This means that customer data segregation is already done by having separate virtual apps and additional data restrictions by user or group of users can be added within each one if required.
+
+Note that case 1. we implicitly mean having multiple customers in the same Qlik Cloud tenant which __is not recommended__. There are capabilities such as alerting, automations, collaborative notes, etc. __which need to be disabled to ensure correct customer segregation and avoid any security breach__. Otherwise one end-customer could see users from another end-customer, which is not desirable.   
+With Case 2. we implicitly mean a multi-tenant architecture i.e. one (sub)tenant per end-customer where all added-value capabilities can be enabled for each (sub)tenant without compromising security.
 
 Next two sections in this document are meant to review how the SA mechanism works in both client-managed and SaaS before we dig deeper into the key differences and how to implement/migrate in SaaS when coming from a client-managed deployment.
 

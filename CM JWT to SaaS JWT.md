@@ -65,7 +65,7 @@ Source: [What's new in Qlik Cloud](https://help.qlik.com/en-US/cloud-services/Su
 1. Must include `notBefore` for the signing options to comply with the new changes.
 2. Must include `jti` (JWT ID) for the Qlik JWT payload to comply with the new changes.
 
-You'll get an `access denied` from Qlik Cloud if the two additional attributes i.e. `jti` and `notBefore` are not presente in the JWT token. If you implemented the JWT code before JUne 6th, 2022 you'll most likely don't have these two attributes. Therefore make sure your JWT code is adjusted accordingly to include them.
+You'll get an `access denied` from Qlik Cloud if the two additional attributes i.e. `jti` and `notBefore` are not present in the JWT token. If you implemented the JWT code before JUne 6th, 2022 you'll most likely don't have these two attributes. Therefore make sure your JWT code is adjusted accordingly to include them.
 
 Here is a sample JWT payload including the new mandatory attribute `jti` and optional attribute `groups`:
 

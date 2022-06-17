@@ -124,7 +124,7 @@ Here is a sample of the signing options in JWT including the new mandatory atttr
         "keyid": "eccf892a-3457-6789-4455-a11g3f869a47",
         "algorithm": "RS256",
         "issuer": "https://oemiberia.eu.qlikcloud.com",
-        "expiresIn": "6h",
+        "expiresIn": "1h",
         "notBefore": "0s",
         "audience": "qlik.api/login/jwt-session"
     }
@@ -163,7 +163,7 @@ Example of JWT creation and signing code:
       keyid: 'my-custom-jwt',
       algorithm: 'RS256',
       issuer: 'https://oemiberia.eu.qlikcloud.com',
-      expiresIn: '6h',
+      expiresIn: '1h',
       notBefore: '0s',
       audience: 'qlik.api/login/jwt-session',
     };

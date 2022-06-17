@@ -92,7 +92,7 @@ ___
 
 Before you go over the how-to assets in the next section, there are few considerations with SaaS JWT. As you know, the end goal is to avoid the interactive login when users access embedded content from a Qlik Sense application. This requires an integration between your solution and QSE SaaS so that users are automatically logged into QSE SaaS i.e. SSO authentication. Unlike Qlik Sense client-managed, Ticket authentication isn't an option in SaaS so the only option available is JWT.
 
-The JWT has basically three pieces or components: the payload, the signing options, the private key for signing the token. Qlik made important changes to the JWT authorization capabilities with tenants on June 6, 2022. Basicallt, there are two additional attributes for Qlik's JWT token:
+The JWT has basically three pieces or components: the payload, the signing options, the private key for signing the token. Qlik made important changes to the JWT authorization capabilities with tenants on June 6, 2022. Basically, there are two additional attributes for Qlik's JWT token:
 
 ![image](https://user-images.githubusercontent.com/10588391/174314853-2862f04c-268c-41d3-bcad-e520f10a4718.png)
 Source: [What's new in Qlik Cloud](https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/Introduction/saas-change-log.htm)
@@ -104,7 +104,7 @@ Source: [What's new in Qlik Cloud](https://help.qlik.com/en-US/cloud-services/Su
 1. Must include `notBefore` for the signing options to comply with the new changes.
 2. Must include `jti` (JWT ID) for the Qlik JWT payload to comply with the new changes.
 
-You'll get an `access denied` from Qlik Cloud if the two additional attributes i.e. `jti` and `notBefore` are not presente in the JWT token. If you implemented the JWT code before JUne 6th, 2022 you'll most likely don't have these two attributes. Therefore make sure your JWT code is adjusted accordingly to include them.
+You'll get an `access denied` from Qlik Cloud if the two additional attributes i.e. `jti` and `notBefore` are not present in the JWT token. If you implemented the JWT code before JUne 6th, 2022 you'll most likely don't have these two attributes. Therefore make sure your JWT code is adjusted accordingly to include them.
 
 Here is a sample JWT payload including the new mandatory attribute `jti` and optional attribute `groups`:
 

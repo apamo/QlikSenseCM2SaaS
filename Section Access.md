@@ -102,10 +102,10 @@ The other system fields are optional:
 
             {  
             "jti": "k5bU_cFI4_-vFfpJ3DjDsIZK-ZhJGRbBfusUWZ0ifBI"
-            "sub": "alvaro.palacios@qlik.com",   
+            "sub": "mike.johnson@acme.com",   
             "subType": "user",    
-            "name": "Alvaro Palacios",   
-            "email": "alvaro.palacios@qlik.com",    
+            "name": "Mike Johnson",   
+            "email": "mike.johnson@acme.com",    
             "email_verified": true,    
             "groups": ["Presales"]  
             }
@@ -214,8 +214,8 @@ When using JWT auth in SaaS, the subject claim `sub` and the email address claim
         "jti": "k5bU_cFI4_-vFfpJ3DjDsIZK-ZhJGRbBfusUWZ0ifBI",
         "sub": "auth0|a08D000001C6YtJIAV",
         "subType": "user",
-        "name": "Alvaro Palacios",
-        "email": "alvaro.palacios@qlik.com",
+        "name": "Mike Johnson",
+        "email": "mike.johnson@acme.com",
         "email_verified": true,
         "groups": ["Developers", "Sales", "Presales"]
     }

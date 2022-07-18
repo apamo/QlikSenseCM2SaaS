@@ -110,10 +110,10 @@ Here is a sample JWT payload including the new mandatory attribute `jti` and opt
 
     {
         "jti": "k5bU_cFI4_-vFfpJ3DjDsIZK-ZhJGRbBfusUWZ0ifBI",
-        "sub": "SomeSampleSeedValue", //e.g. QLIK\Alvaro or auth0|a08D000001C6YtJIAV
+        "sub": "SomeSampleSeedValue", //e.g. ACME\Mike or auth0|a08D000001C6YtJIAV
         "subType": "user",
-        "name": "Alvaro Palacios",
-        "email": "alvaro.palacios@qlik.com",
+        "name": "Mike Johnson",
+        "email": "mike.johnson@acme.com",
         "email_verified": true,
         "groups": ["Developers", "Sales", "Presales"]
     }
@@ -123,7 +123,7 @@ Here is a sample of the signing options in JWT including the new mandatory atttr
     {
         "keyid": "eccf892a-3457-6789-4455-a11g3f869a47",
         "algorithm": "RS256",
-        "issuer": "https://oemiberia.eu.qlikcloud.com",
+        "issuer": "https://mytenant.eu.qlikcloud.com",
         "expiresIn": "1h",
         "notBefore": "0s",
         "audience": "qlik.api/login/jwt-session"
@@ -149,10 +149,10 @@ Example of JWT creation and signing code:
       jti: uid.sync(32), // 32 bytes random string
       sub: '0hEhiPyhMBdtOCv2UZKoLo4G24p-7R6eeGdZUQHF0-c',
       subType: 'user',
-      name: 'Alvaro Palacios',
-      email: 'alvaro.palacios@qlik.com',
+      name: 'Mike Johnson',
+      email: 'mike.johnson@acme.com',
       email_verified: true,
-      groups: ['Administrators', 'Presales', 'Qlik'],
+      groups: ['Administrators', 'Presales', 'Acme'],
     };
 
     const privateKey = fs.readFileSync('./certs/privatekey.pem');
@@ -162,7 +162,7 @@ Example of JWT creation and signing code:
     const signingOptions = {
       keyid: 'my-custom-jwt',
       algorithm: 'RS256',
-      issuer: 'https://oemiberia.eu.qlikcloud.com',
+      issuer: 'https://mytenant.eu.qlikcloud.com',
       expiresIn: '1h',
       notBefore: '0s',
       audience: 'qlik.api/login/jwt-session',

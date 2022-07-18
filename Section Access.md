@@ -246,7 +246,8 @@ Note that Qlik Sense SaaS will get the information from the `groups` claim of th
 
 In this case, the subject claim cannot be mapped to a custom value and it's an auto-generated string e.g. `auth0|a08D000001C6YtJIAV` that can be viewed in **Users** section of the **Management Console**.
 
-![Users in SaaS Management Console configured with Qlik IdP](https://user-images.githubusercontent.com/10588391/168804006-831e5ae4-3efc-4f1d-b586-ca86f17f7ab2.png)
+![Users in SaaS Management Console configured with Qlik IdP](https://user-images.githubusercontent.com/10588391/179532964-31d1b9e8-6e4a-40ff-9cc6-437d2de81fe0.png)
+
 
 &nbsp;
 

@@ -1,5 +1,3 @@
-# From Client-Managed to SaaS: **QSEoW JWT to SaaS JWT**
-
 ## Introduction
 
 An introduction to JSON Web Tokens can be found in this [link](https://jwt.io/introduction).

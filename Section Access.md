@@ -1,5 +1,3 @@
-# From Client-Managed to SaaS: **Section Access**
-
 ## Introduction
 This user guide describes the outline for allowing OEM partners to successfully migrate to Qlik Sense SaaS (Qlik Cloud) a Section Access (SA) table that works in Qlik Sense Enterprise server (the version of the product you can install on Windows). When "SaaS" or "Qlik Cloud" is mentioned in this document, we are still referring to the cloud version of Qlik Sense hsoted in our own cloud infrastructure. When "Client-managed" or "Windows" is mentioned in this document, it means the server version of the Qlik Sense hosted by you in your own servers in either a private cloud, public cloud or on-premise.
 

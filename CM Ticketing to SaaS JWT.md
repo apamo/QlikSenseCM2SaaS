@@ -1,5 +1,3 @@
-# From Client-Managed to SaaS: **Web Ticketing to SaaS JWT**
-
 ## Introduction
 This user guide is designed to help OEM partners with a Qlik Sense Client-managed  deployment that are thinking or willing to move to SaaS.
 

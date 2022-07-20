@@ -1,5 +1,3 @@
-# From Client-Managed to SaaS: **Authorization Model**
-
 ## Introduction
 As of May 2022, Authorization model in SaaS offers limited granular security permissions to control access to resources and capabilities in SaaS.  
 Future improvements are underway to provide a fine grained security model.

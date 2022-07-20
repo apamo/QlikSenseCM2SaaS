@@ -1,5 +1,3 @@
-# Introduction
-
 Qlik Sense SaaS has a different security setup as compared with Qlik Sense Client Managed (CM). Please note CM is the new name for Qlik Sense on Windows. 
 
 In this document we make a split for security for 

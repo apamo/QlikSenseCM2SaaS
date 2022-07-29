@@ -14,7 +14,7 @@ In SaaS you can use OIDC or JWT to authenticate. For embedding/OEM use cases nor
 ![image](https://user-images.githubusercontent.com/12411165/166262153-2aa15a45-f272-43fb-bcea-c6f4bb133a82.png)
 
 
-OIDC and JWT are both also available on Qlik Sense CM. (But CM has more options like header, SAML, ticketing, AD, that are not available on SaaS.
+OIDC and JWT are both also available on Qlik Sense CM. (But CM has more options like header, SAML, ticketing, AD, that are not available on SaaS.)
 
 There is another difference: the use of developer keys. Developer keys are only used on SaaS, they enable a developer to make code which executes API calls on a users behalf. If you create a key the key will have the same access rights as the user who created the key. So if John creates a key, and Simon uses the key, he will have the same rights as John for these API calls. Use the links below for more information
 - [qlik.dev, create your first API key](https://qlik.dev/tutorials/generate-your-first-api-key)

@@ -9,7 +9,7 @@ We also assume you have a multi-tenant SaaS platform in which you want to embed 
 
 In the end you want to provide an integrated view of Qlik Sense in your software. The user should be able to access only his authorized data in a seamless way. Also the user should be able to view Qlik Sense without having to authenticate again (SSO). You also want to make sure that the right Qlik Sense content is shown in an automated way with a minimum amount of manual work.
 
-## Difference SaaS and CM: authentication overview
+# Difference SaaS and CM: authentication overview
 In SaaS you can use OIDC or JWT to authenticate. For embedding/OEM use cases normally JWT is used. For OIDC you have the following options:
 
 ![image](https://user-images.githubusercontent.com/12411165/166262153-2aa15a45-f272-43fb-bcea-c6f4bb133a82.png)
@@ -21,20 +21,20 @@ There is another difference: the use of developer keys. Developer keys are only 
 - [qlik.dev, create your first API key](https://qlik.dev/tutorials/generate-your-first-api-key)
 - [Qlik help](https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/Admin/mc-generate-api-keys.htm)
 
-### Difference SaaS and CM: OIDC
+## Difference SaaS and CM: OIDC
 There should not be a lot of difference between SaaS and CM use of OIDC. 
 
 OIDC guides:
 - [Client managed OIDC guide](https://help.qlik.com/en-US/sense-admin/February2022/Subsystems/DeployAdministerQSE/Content/Sense_DeployAdminister/QSEoW/Administer_QSEoW/Managing_QSEoW/OIDC-configuration-Auth0.htm), 
 - [SaaS OIDC guide](https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/Admin/OIDC-intro.htm)
 
-### Difference SaaS and CM: JWT
+## Difference SaaS and CM: JWT
 JWT does have some slight differences. The idea is the same but the endpoints and the contents of the JWT have changed. The basic idea is still that you
 - create a jwt on the server side of your host application (your web server)
 - when you open a Qlik Sense page you include the JWT in the header of the request
 - Qlik Sense will now supply a cookie to be used in further requests. 
 
-#### High level flow
+## High level authentication flow
 In client managed (CM) the flow was like this:
 
 ![image](https://user-images.githubusercontent.com/12411165/166260604-c7b1c90d-c8d1-40c9-92c3-1ca2fa04056f.png)
@@ -43,13 +43,15 @@ In SaaS we don't have virtual proxies anymore. There is just one URL to use: you
 
 ![image](https://user-images.githubusercontent.com/12411165/166661007-ad2b1e5e-788b-433c-9280-c96dd0526c93.png)
 
-or more detailed:
+# Detail level authentication flow
 
 ![image](https://user-images.githubusercontent.com/12411165/166661328-ab1adef5-e7fe-4700-bde6-489524504fb8.png)
 
 Note: that when you receive your session cookie, you can just open the hub an app, or do anything you like with the APIs. 
 
-#### JWT contents
+# JWT
+
+## JWT contents
 Before we go into the details, what is a JWT? JSON Web Token (JWT) is an open standard (RFC 7519) that defines a compact and self-contained way for securely transmitting information between parties as a JSON object.
 
 A JWT consists of three parts: a header, a payload, and a signature.
@@ -64,7 +66,7 @@ In the image below you can find a javascript example on how to make a jwt.
 
 ![image](https://user-images.githubusercontent.com/12411165/166662122-ac3a4b17-a1b8-468f-a4dd-cb00443ee657.png)
 
-#### JWT key difference with CM
+## JWT key difference with CM
 
 The required claims for a Qlik JWT payload are the following:
 
@@ -82,20 +84,23 @@ Typically part of jwt payload
 Typically part of jwt signing options
 
 
-#### Manuals
-SaaS JWT implementation guides
+## JWT implementation guides
+### SaaS
 - [Qlik Sense Saas: mashup with JWT authentication](https://github.com/jackBrioschi/Basic_Mashup_with_JWT_Authentication_Qlik_Sense_SaaS). The goal of this project is to show how it works a mashup on Qlik Cloud Services with a JWT authentication. In particular, the use case I developed is related to a single cloud tenant environment and uses a combination of REST and Javascript APIs to set-up a mashup integration.
 - [Create Signed Tokens for JWT Authorization](https://qlik.dev/tutorials/create-signed-tokens-for-jwt-authorization) Configure Qlik Sense SaaS tenant to use JWT for authorization
 - [Implement JWT Authorization](https://qlik.dev/tutorials/implement-jwt-authorization) Configure a Qlik Cloud tenant to use JWT authorization
+- [JWT with Java example code](https://github.com/jacobvinzent/JWT-with-JAVA-on-Qlik-Sense-SaaS)
+- [JWT with .NET example code](https://github.com/jacobvinzent/JWT-with-.Net-on-Qlik-Sense-SaaS)
 
-[Setup JWT for windows](https://integration.qlik.com/?selection=ALkrMhX8JgMMtgRcJ)
+### Client managed
+- [Setup JWT for windows](https://integration.qlik.com/?selection=ALkrMhX8JgMMtgRcJ)
 
-## Difference SaaS and CM: authorization overview
+# Difference SaaS and CM: authorization overview
 We make a division for 
 - functional authorizations (what can you do? Read or edit, or publish and app or sheet etc.)
 - data authorizations (what level of detail can you see?, which organizational levels like countries, regions, cities, departments etc.)
 
-### Functional authorizations
+## Functional authorizations
 Today in SaaS, data [security and governance](https://help.qlik.com/en-US/cloud-services/Subsystems/Hub/Content/Sense_Hub/Introduction/data-security-governance.htm) in Qlik Sense Enterprise SaaS is achieved through spaces. Spaces are managed in the Management Console on the Spaces page. So the basic principle is that you create a space and assign a role to it. 
 
 In CM we made use of [security rules](https://youtu.be/sdCVsMzTf64?list=PLqJfqgR62cVAZxS34WGnByjASKrGf0Fpk) to limit access to functionality. That feature has been removed in SaaS. The authorization system in SaaS is currently being migrated to a more advanced system using roles. Those new features will be delivered in the future.
@@ -115,15 +120,15 @@ We’ll cover spaces in more detail next, but the key take-away is that the same
 Spaces come in 3 types to give you control about what users can do to an app
 ![image](https://user-images.githubusercontent.com/12411165/166256470-009146b0-549c-47cd-85e0-228fff938c07.png)
 
-#### Personal spaces
+### Personal spaces
 Your personal space is your own private work area in the cloud hub. You cannot share apps from your personal space and other users cannot collaborate with you.
 
-#### Shared spaces
+### Shared spaces
 Shared spaces are used to develop apps collaboratively and share them with other users in the space. A team might have a shared space for the private development and consumption of their own apps.
 
 Shared spaces can be created by any user with a professional license.
 
-#### Managed spaces
+### Managed spaces
 Managed spaces are used for providing governed access to apps with strict access control both for the app and the app data. In a managed space, only the space owner and target app consumers can open the apps. No other users can open the apps in the managed space unless they have been given permission.
 
 Apps in managed spaces are developed in personal or shared spaces and published to the managed space. Members need the Can publish permission in the managed space to publish.
@@ -131,12 +136,12 @@ Apps in managed spaces are developed in personal or shared spaces and published 
 Managed spaces can only be created by tenant or analytics administrators, or users with the ManagedSpaceCreator role.
 
 
-### Data authorizations (section access)
+## Data authorizations (section access)
 Section access is basically the same as in CM. Emails can be used in section access
 
 ![image](https://user-images.githubusercontent.com/12411165/166264126-d5335fab-15d2-47f1-b850-a386ee2be3d3.png)
 
-#### Entitlements
+### Entitlements
 Entitlements Associate with Data Model to drive data visibility
 Associate one data element to drive visibility across entire data model
 Row and column level

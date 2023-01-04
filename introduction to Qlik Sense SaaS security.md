@@ -86,7 +86,6 @@ Typically part of jwt signing options
 
 ## JWT implementation guides
 ### SaaS
-- [Qlik Sense Saas: mashup with JWT authentication](https://github.com/jackBrioschi/Basic_Mashup_with_JWT_Authentication_Qlik_Sense_SaaS). The goal of this project is to show how it works a mashup on Qlik Cloud Services with a JWT authentication. In particular, the use case I developed is related to a single cloud tenant environment and uses a combination of REST and Javascript APIs to set-up a mashup integration.
 - [Create Signed Tokens for JWT Authorization](https://qlik.dev/tutorials/create-signed-tokens-for-jwt-authorization) Configure Qlik Sense SaaS tenant to use JWT for authorization
 - [Implement JWT Authorization](https://qlik.dev/tutorials/implement-jwt-authorization) Configure a Qlik Cloud tenant to use JWT authorization
 - [JWT with Java example code](https://github.com/jacobvinzent/JWT-with-JAVA-on-Qlik-Sense-SaaS)
